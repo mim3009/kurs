@@ -37,11 +37,8 @@ public class Auto extends Actor {
 		road = model.getRoad();
 		quequeToCassir = model.getQueueToCassir();
 		quequeOfLost = model.getQueueOfLost();
-		
-		////////////////////////////////
 		quequeTimeToCassir = model.getQueueTimeToCassir();
 		quequeTimeToExit = model.getQueueTimeToExit();
-		////////////////////////////////
 	}
 
 	public Auto(String string, Main gui, Model model) {
@@ -59,14 +56,11 @@ public class Auto extends Actor {
 			quequeOfLost.add(this);
 		}
 		quequeToCassir.add(this);
-		///////////////
 		double r1 = getDispatcher().getCurrentTime();
 		quequeTimeToCassir.add(1);		
-		///////////////
 		try {
-			waitForCondition(isZakaz,"Коли касир прийме заказ");
-			
-			///////////////
+			waitForCondition(isZakaz,"kogda kassir primet zakaz");
+
 			double t1 = getDispatcher().getCurrentTime();
 			double v = t1-r1;
 			for(int i = 0;i<(int)v;i++){
@@ -75,32 +69,26 @@ public class Auto extends Actor {
 			while(quequeTimeToCassir.size()!=0){
 				quequeTimeToCassir.removeFirst();		
 			}
-			getDispatcher().printToProtocol("Клієнт стояв у черзі до касира протягом: " + (t1-r1));
-			///////////////
+			getDispatcher().printToProtocol("klient stoial v ocheredi k kassiru: " + (t1-r1));
 			
-			waitForCondition(isRoad, "перший в черзі і шлях вільний"); 
+			waitForCondition(isRoad, "perviy v ocheredi i put svoboden"); 
 			
-			getDispatcher().printToProtocol(this.getNameForProtocol()+" починає відїзжати");
-			////////////
+			getDispatcher().printToProtocol(this.getNameForProtocol()+" nachinaet otiezjat");
 			double r = getDispatcher().getCurrentTime();
 			quequeTimeToExit.add(1);
-			////////////
 			holdForTime(rnd.next());
 			model.getQueueToExit().remove(this);
-			
-			//////////////////////////
 			double t = getDispatcher().getCurrentTime();
 			double a = t-r;
-			getDispatcher().printToProtocol("Клієнт стояв у черзі на виїзд протягом: " + a);
+			getDispatcher().printToProtocol("klient stoial v ocheredi na viezd: " + a);
 			for(int i = 0;i<(int)a;i++){
 				quequeTimeToExit.add(1);		
 			}
 			while(quequeTimeToExit.size()!=0){
 				quequeTimeToExit.removeFirst();		
 			}
-			//////////////////////////
-			getDispatcher().printToProtocol(this.getNameForProtocol()+" поїхав");
-			getDispatcher().printToProtocol("Клієнт обслуговувався протягом: " + (t-r1));
+			getDispatcher().printToProtocol(this.getNameForProtocol()+" poehal");
+			getDispatcher().printToProtocol("Klient obsluzivalsa na protiazhenii: " + (t-r1));
 		} catch (DispatcherFinishException e) {
 			return;
 		}	

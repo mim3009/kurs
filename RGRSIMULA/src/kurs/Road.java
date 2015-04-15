@@ -25,13 +25,13 @@ public class Road extends Actor {
 
 	@Override
 	protected void rule() {
-		getDispatcher().printToProtocol("Старт дороги"+String.valueOf(gui.getChooseData_4().getDouble()));
+		getDispatcher().printToProtocol("Start dorogi "+String.valueOf(gui.getChooseData_4().getDouble()));
 		while (getDispatcher().getCurrentTime() <= gui.getChooseData_4().getDouble()) {
-			getDispatcher().printToProtocol("Дорога закрита");
+			getDispatcher().printToProtocol("Doroga zakrita");
 			holdForTime(rnd.next());
 			queueRoad.add(1);
 			open = true;
-			getDispatcher().printToProtocol("Дорога відкрита");
+			getDispatcher().printToProtocol("Doroga otkrita");
 			holdForTime(rnd.next());
 			open = false;
 			queueRoad.remove(1);

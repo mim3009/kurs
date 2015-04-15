@@ -38,17 +38,17 @@ public class Cassir extends Actor {
 			
 			try {
 				
-				waitForCondition(isAuto,"Коли буде автомобіль для обслуговування");
+				waitForCondition(isAuto,"Kogda budet mashina dlia obsluzivania");
 	
 				Auto auto = (Auto) queueToCassir.removeFirst();
-				getDispatcher().printToProtocol("Кассир починає роботу з клієнтом");
-				getDispatcher().printToProtocol("Кассир прийняв замовлення");
+				getDispatcher().printToProtocol("Kassir nachinaet rabotu s klientom");
+				getDispatcher().printToProtocol("Kassir prinial zakaz");
 				holdForTime(gui.getChooseRandom_1().next());
 				
-				waitForCondition(isPlaceToOut, "Коли буде місце в черзі на виїзд");
+				waitForCondition(isPlaceToOut, "Kogda budet mesto v ocheredi na viezd");
 				
 				auto.setZakaz(true);
-				getDispatcher().printToProtocol("Кассир виконав замовлення");
+				getDispatcher().printToProtocol("Kassir vipolnil zakaz");
 				queueToCassir.remove(auto);
 				queueToExit.add(auto);
 		} catch (DispatcherFinishException e) {

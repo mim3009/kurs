@@ -18,7 +18,7 @@ public class GeneratorAuto extends Actor{
 		int i = 0;
 		while(getDispatcher().getCurrentTime() < gui.getChooseData_4().getDouble()){
 			holdForTime(gui.getChooseRandom().next());
-			Auto auto = new Auto("Aвто"+String.valueOf(++i), gui , model);
+			Auto auto = new Auto("Auto"+String.valueOf(++i), gui , model);
 			getDispatcher().addStartingActor(auto);
 		}
 		

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<project default="run" name="Kurs project">
+		<property name="lib.dir" value="lib"/>
+		<path id="classpath">
+		            <fileset dir="${lib.dir}" includes="**/*.jar"/>
+		 </path>
+		
+		<path id="build.classpath">
+		  <fileset dir=".">
+		     <include name="lib/*.jar"/>
+		  </fileset>
+		</path>
+
+		<pathconvert property="manifest.classpath" pathsep=" ">
+		  <path refid="build.classpath"/>
+		  <mapper>
+		    <chainedmapper>
+		       <flattenmapper/>
+		       <globmapper from="*.jar" to="lib/*.jar"/>
+		    </chainedmapper>
+		  </mapper>
+		</pathconvert>
+
+		<target name="buildjar" depends="compile">
+		  <jar jarfile="kp.jar">
+		     <fileset dir="ant" />
+		     <manifest>
+		       <attribute name="Main-Class" value="kurs.Main"/>
+		       <attribute name="Class-Path" value="${manifest.classpath}"/>
+		     </manifest>
+		 </jar>
+		</target>
+		
+		<target name="run" depends="buildjar">
+			<java jar="kp.jar" fork="true" >
+			  <classpath>
+			    <path refid="classpath"/>
+			    <pathelement location="kp.jar"/>
+			  </classpath>
+			</java>
+		</target>
+		
+		<target name="compile">
+			<javac srcdir="src" destdir="ant" classpath="classpath"/>
+		</target>
+		
+		<target name="doc" depends="compile">
+		    <javadoc sourcepath="src" destdir="doc"/>
+		  </target>
+
+		
+	</project>	

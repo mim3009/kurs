@@ -125,7 +125,7 @@ public class Main extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(324, 11, 504, 719);
 		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("Тест моделі", panel_1);
+		tabbedPane.addTab("Test Modeli", panel_1);
 		panel_1.setLayout(null);
 
 		diagram = new Diagram();
@@ -179,7 +179,7 @@ public class Main extends JFrame {
 		
 		contentPane.add(tabbedPane);
 		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("Статистика", panel_2);
+		tabbedPane.addTab("Statistika", panel_2);
 		panel_2.setLayout(new CardLayout(0, 0));
 
 		statisticsManager = new StatisticsManager();

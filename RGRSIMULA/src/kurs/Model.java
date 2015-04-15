@@ -32,9 +32,6 @@ public class Model implements IStatisticsable, IExperimentable,
 	private DiscretHisto dHistoForQueueOfLost;
 	private QueueForTransactions queueOfLost;
 	private Store queueRoad;
-	
-	
-	//////////////////////
 	private QueueForTransactions queueTimeToExit;
 	private DiscretHisto histoForQueueTimeToExit;
 	private QueueForTransactions queueTimeToCassir;
@@ -58,7 +55,7 @@ public class Model implements IStatisticsable, IExperimentable,
 	public QueueForTransactions getQueueTimeToExit() {
 		if (queueTimeToExit == null) {
 			queueTimeToExit = new QueueForTransactions();
-			queueTimeToExit.setNameForProtocol("час черги на виїзд");
+			queueTimeToExit.setNameForProtocol("vremia ocheredi na viezd");
 			queueTimeToExit.setDispatcher(dispatcher);
 			queueTimeToExit.setDiscretHisto(getHistoForQueueTimeToExit());
 			queueTimeToExit.init();
@@ -69,21 +66,18 @@ public class Model implements IStatisticsable, IExperimentable,
 	public QueueForTransactions getQueueTimeToCassir() {
 		if (queueTimeToCassir == null) {
 			queueTimeToCassir = new QueueForTransactions();
-			queueTimeToCassir.setNameForProtocol("час черги до касира");
+			queueTimeToCassir.setNameForProtocol("vremia ocheredi do kassira");
 			queueTimeToCassir.setDispatcher(dispatcher);
 			queueTimeToCassir.setDiscretHisto(getHistoForQueueTimeToCassir());
 			queueTimeToCassir.init();
 		}
 		return queueTimeToCassir;
 	}
-	
-	/////////////////////////
-	
-	
+		
 	
 	public Road getRoad() {
 		if (road == null) {
-			road = new Road("Дорога", gui, this);
+			road = new Road("Doroga", gui, this);
 		}
 		return road;
 	}
@@ -93,7 +87,7 @@ public class Model implements IStatisticsable, IExperimentable,
 			queueToCassir = new QueueForTransactions<>();
 			queueToCassir.setMaxSize(gui.getChooseData_2().getInt()
 					* gui.getChooseData_1().getInt());
-			queueToCassir.setNameForProtocol("Черга до касира");
+			queueToCassir.setNameForProtocol("Ochered k kassiru");
 			queueToCassir.setDispatcher(dispatcher);
 			queueToCassir.setDiscretHisto(getHistoForQueueToCassir());
 			queueToCassir.init();
@@ -105,7 +99,7 @@ public class Model implements IStatisticsable, IExperimentable,
 		if (queueToExit == null) {
 			queueToExit = new QueueForTransactions();
 			queueToExit.setMaxSize(gui.getChooseData_3().getInt());
-			queueToExit.setNameForProtocol("Черга на виїзд");
+			queueToExit.setNameForProtocol("Ochered na viezd");
 			queueToExit.setDispatcher(dispatcher);
 			queueToExit.setDiscretHisto(getHistoForQueueToExit());
 			queueToExit.init();
@@ -123,7 +117,7 @@ public class Model implements IStatisticsable, IExperimentable,
 	public QueueForTransactions getQueueOfLost() {
 		if (queueOfLost == null) {
 			queueOfLost = new QueueForTransactions();
-			queueOfLost.setNameForProtocol("Черга втрачених");
+			queueOfLost.setNameForProtocol("Ochered poterianuh");
 			queueOfLost.setDispatcher(dispatcher);
 			queueOfLost.setDiscretHisto(getHistoForQueueToExit());
 			queueOfLost.init();
@@ -147,7 +141,7 @@ public class Model implements IStatisticsable, IExperimentable,
 
 	public GeneratorAuto getGenAuto() {
 		if (genAuto == null) {
-			genAuto = new GeneratorAuto("Генератор автомобилей", gui, this);
+			genAuto = new GeneratorAuto("Generator avtomobiley", gui, this);
 		}
 
 		return genAuto;
@@ -156,8 +150,8 @@ public class Model implements IStatisticsable, IExperimentable,
 	public MultiActor getMultiCassir() {
 		if (multiCassir == null) {
 			multiCassir = new MultiActor();
-			multiCassir.setNameForProtocol("MultiActor для бригади касиров");
-			multiCassir.setOriginal(new Cassir("Касир", gui, this));
+			multiCassir.setNameForProtocol("MultiActor dlia brigadu kassirov");
+			multiCassir.setOriginal(new Cassir("Kassir", gui, this));
 			multiCassir.setNumberOfClones(gui.getChooseData_1().getInt());
 		}
 
@@ -166,13 +160,12 @@ public class Model implements IStatisticsable, IExperimentable,
 
 	public Model(Dispatcher d, Main g) {
 		if (d == null || g == null) {
-			System.out.println("Не визначено диспетчера або GUI для Model");
-			System.out.println("Подальша робота неможлива");
+			System.out.println("Ne opredelen dispetcher ili GUI dlia Model");
+			System.out.println("dalneyshaia rabota ne vozmojna");
 			System.exit(0);
 		}
 		dispatcher = d;
 		gui = g;
-		// Передаємо акторів до стартового списку диспетчера
 		componentsToStartList();
 	}
 
@@ -186,10 +179,8 @@ public class Model implements IStatisticsable, IExperimentable,
 		getQueueToCassir().setPainter(gui.getDiagram().getPainter());
 		getQueueToExit().setPainter(gui.getDiagram_1().getPainter());
 		getQueueOfLost().setPainter(gui.getDiagram_2().getPainter());
-		//////////////////
 		getQueueTimeToExit().setPainter(gui.getDiagram_3().getPainter());
 		getQueueTimeToCassir().setPainter(gui.getDiagram_4().getPainter());
-		//////////////////
 		Painter p = new Painter(gui.getDiagram_1());
 		p.setColor(Color.red);
 		p.placeToXY(0, 0);
@@ -199,7 +190,7 @@ public class Model implements IStatisticsable, IExperimentable,
 	public Store getQueueRoad() {
 		if (queueRoad == null) {
 			queueRoad = new Store();
-			queueRoad.setNameForProtocol("Дорога");
+			queueRoad.setNameForProtocol("Doroga");
 			queueRoad.setDispatcher(dispatcher);
 
 		}
@@ -218,13 +209,13 @@ public class Model implements IStatisticsable, IExperimentable,
 	@Override
 	public Map<String, Double> getResultOfExperiment() {
 		Map<String, Double> map = new HashMap<>();
-		map.put("Гістограма для довжини черги до касира",
+		map.put("Histograma dlia dlinu chergi do kassira",
 				dHistoForQueueToCassir.getAverage());
-		map.put("Гістограма для довжини черги на виїзд",
+		map.put("Histograma dlia dlinu chergi na viezd",
 				dHistoForQueueToExit.getAverage());
-		map.put("Гістограма для часу черги на виїзд",
+		map.put("Histograma dlia vremeni chergi na viezd",
 				histoForQueueTimeToExit.getAverage());
-		map.put("Гістограма для часу черги до касира",
+		map.put("Histograma dlia vremeni chergi do kassira",
 				histoForQueueTimeToCassir.getAverage());
 		return map;
 	}
@@ -243,9 +234,9 @@ public class Model implements IStatisticsable, IExperimentable,
 	@Override
 	public Map<String, Double> getTransResult() {
 		Map<String, Double> map = new HashMap<>();
-		map.put("Гістограма для довжини черги до касира",
+		map.put("Histograma dlia dlinu chergi do kassira",
 				dHistoForQueueToCassir.getAverage());
-		map.put("Гістограма для довжини черги на виїзд",
+		map.put("Histograma dlia dlinu chergi na viezd",
 				dHistoForQueueToExit.getAverage());
 		return map;
 	}
@@ -253,11 +244,11 @@ public class Model implements IStatisticsable, IExperimentable,
 	@Override
 	public Map<String, IHisto> getStatistics() {
 		Map<String, IHisto> map = new HashMap<>();
-		map.put("Гістограма для довжини черги до касира",
+		map.put("Histograma dlia dlinu chergi do kassira",
 				dHistoForQueueToCassir);
-		map.put("Гістограма для довжини черги на виїзд", dHistoForQueueToExit);
-		map.put("Гістограма для часу черги на виїзд", histoForQueueTimeToExit);
-		map.put("Гістограма для часу черги до касира", histoForQueueTimeToCassir);
+		map.put("Histograma dlia dlinu chergi na viezd", dHistoForQueueToExit);
+		map.put("Histograma dlia vremeni chergi na viezd", histoForQueueTimeToExit);
+		map.put("Histograma dlia vremeni chergi do kassira", histoForQueueTimeToCassir);
 		return map;
 
 	}
