@@ -318,7 +318,7 @@ public class Main extends JFrame {
 
 	public void TZ() {
 
-		String str = "tz.html";
+		String str = "./lib/tz.html";
 		URL url = getClass().getResource(str);
 		try {
 			textPane.setPage(url);

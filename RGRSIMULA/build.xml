@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<project default="run" name="Kurs project">
-		<property name="lib.dir" value="lib"/>
+	<project default="run" name="kp">
+		<property name="lib.dir" value="src/kurs/lib"/>
 		<path id="classpath">
 		            <fileset dir="${lib.dir}" includes="**/*.jar"/>
 		 </path>
@@ -22,6 +22,14 @@
 		</pathconvert>
 
 		<target name="buildjar" depends="compile">
+			<delete file="kp.jar"></delete>
+			<mkdir dir="ant/kurs/lib"/>
+	        <copy includeemptydirs="false" todir="ant/kurs/lib">
+	            <fileset dir="src/kurs/lib">
+	            </fileset>
+	        </copy>
+
+			
 		  <jar jarfile="kp.jar">
 		     <fileset dir="ant" />
 		     <manifest>
@@ -41,10 +49,16 @@
 		</target>
 		
 		<target name="compile">
-			<javac srcdir="src" destdir="ant" classpath="classpath"/>
+			<delete dir="ant"></delete>
+			<mkdir dir="ant"/>
+			<javac srcdir="src" destdir="ant" includeantruntime="false">
+				<classpath>
+					<path refid="classpath"></path>
+				</classpath>
+			</javac>
 		</target>
 		
-		<target name="doc" depends="compile">
+		<target name="doc">
 		    <javadoc sourcepath="src" destdir="doc"/>
 		  </target>
 
